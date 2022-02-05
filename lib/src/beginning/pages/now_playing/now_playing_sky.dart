@@ -42,52 +42,33 @@ class _NowPlayingSkyState extends State<NowPlayingSky> with TickerProviderStateM
     });
     await speechController.listen(
       onResult: (result) => _onSpeechResult(result),
-
     );
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
     var speechText = result.recognizedWords;
     print(speechText);
-    switch (speechText.toLowerCase()) {
-      case "geç":
-        audioHandler.skipToNext();
-        break;
-      case "önceki":
-        audioHandler.skipToPrevious();
-        break;
-      case "durdur":
-        audioHandler.pause();
-        break;
-      case "devam Et":
-        audioHandler.play();
-        break;
-      default:
+    if (commands.values.elementAt(0).contains(speechText.toLowerCase())) {
+      audioHandler.skipToNext();
+    } else if (commands.values.elementAt(1).contains(speechText.toLowerCase())) {
+      audioHandler.skipToPrevious();
+    } else if (commands.values.elementAt(2).contains(speechText.toLowerCase())) {
+      audioHandler.pause();
+    } else if (commands.values.elementAt(3).contains(speechText.toLowerCase())) {
+      audioHandler.play();
     }
+
     setState(() {
       _isListening = false;
     });
-
   }
 
-
-
-
-
-
-Map<String, List<String>> commands = {
-  "skip" : ["Geç", "İleri", "Atla"],
-  "previous" : ["Önceki", "Geri", "Geri Git"],
-  "pause" : ["Durdur", "Duraklat", "Durakla"],
-  "play" : ["Devam Et", "Başlat", "Başla"],
-  
-
-};
-
-
-
-
-
+  Map<String, List<String>> commands = {
+    "skip": ["geç", "ileri", "atla"],
+    "previous": ["önceki", "geri", "geri git"],
+    "pause": ["durdur", "duraklat", "durakla" , "dur dur"],
+    "play": ["devam Et", "başlat", "başla"],
+  };
 
   @override
   void initState() {
