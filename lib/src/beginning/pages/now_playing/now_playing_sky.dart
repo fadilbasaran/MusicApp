@@ -48,6 +48,7 @@ class _NowPlayingSkyState extends State<NowPlayingSky> with TickerProviderStateM
 
   void _onSpeechResult(SpeechRecognitionResult result) {
     var speechText = result.recognizedWords;
+    print(speechText);
     switch (speechText) {
       case "Geç":
         audioHandler.skipToNext();
@@ -66,7 +67,27 @@ class _NowPlayingSkyState extends State<NowPlayingSky> with TickerProviderStateM
     setState(() {
       _isListening = false;
     });
+
   }
+
+
+
+
+
+
+Map<String, List<String>> commands = {
+  "skip" : ["Geç", "İleri", "Atla"],
+  "previous" : ["Önceki", "Geri", "Geri Git"],
+  "pause" : ["Durdur", "Duraklat", "Durakla"],
+  "play" : ["Devam Et", "Başlat", "Başla"],
+  
+
+};
+
+
+
+
+
 
   @override
   void initState() {
