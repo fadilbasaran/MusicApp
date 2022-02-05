@@ -5,6 +5,7 @@ import 'package:phoenix/src/beginning/widgets/custom/marquee.dart';
 import 'package:phoenix/src/beginning/widgets/dialogues/phoenix_visualizer.dart';
 import 'package:phoenix/src/beginning/widgets/now_art.dart';
 import 'package:phoenix/src/beginning/widgets/seek_bar.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 import '../../utilities/constants.dart';
 import '../../widgets/dialogues/double_tap.dart';
 import 'package:phoenix/src/beginning/utilities/provider/provider.dart';
@@ -25,6 +26,7 @@ class NowPlaying extends StatefulWidget {
 
 class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
   ScrollController stupidController = ScrollController();
+  SpeechToText speechController = SpeechToText();
   swapControllerTimeOut() async {
     await Future.delayed(const Duration(milliseconds: 500));
     swapController = false;
@@ -275,7 +277,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                             Center(
                                 child: SizedBox(
                                     width: deviceWidth! / 1.1,
-                                    child:const SeekBar())),
+                                    child: const SeekBar())),
                             Padding(
                               padding:
                                   EdgeInsets.only(top: deviceHeight! / 100),
@@ -530,7 +532,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                       ],
                                     ),
                                     child: lyricsDat ==
-                                            "Couldn't find any matching lyrics."
+                                            "Eşleşen şarkı sözü bulunamadı."
                                         ? Center(
                                             child: Container(
                                               width: deviceWidth! / 1.05,
@@ -598,6 +600,10 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
               ),
             );
           })
+
+
+
+          
 //Landscape Screen
         : Consumer<MrMan>(
             builder: (context, bignow, child) {
@@ -1095,7 +1101,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                 ],
                               ),
                               child: lyricsDat ==
-                                      "Couldn't find any matching lyrics."
+                                      "Eşleşen şarkı sözü bulunamadı."
                                   ? Center(
                                       child: Container(
                                         width: deviceWidth! / 1.05,
