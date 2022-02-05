@@ -42,6 +42,7 @@ class _NowPlayingSkyState extends State<NowPlayingSky> with TickerProviderStateM
     });
     await speechController.listen(
       onResult: (result) => _onSpeechResult(result),
+
     );
   }
 
@@ -69,6 +70,7 @@ class _NowPlayingSkyState extends State<NowPlayingSky> with TickerProviderStateM
 
   @override
   void initState() {
+    speechController.initialize();
     animatedPlayPause = AnimationController(vsync: this, duration: Duration(milliseconds: crossfadeDuration));
     super.initState();
   }
