@@ -28,8 +28,9 @@ class NowPlaying extends StatefulWidget {
 
 class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
   bool _isListening = false;
+    SpeechToText speechController = SpeechToText();
   ScrollController stupidController = ScrollController();
-  SpeechToText speechController = SpeechToText();
+
   swapControllerTimeOut() async {
     await Future.delayed(const Duration(milliseconds: 500));
     swapController = false;
