@@ -49,17 +49,17 @@ class _NowPlayingSkyState extends State<NowPlayingSky> with TickerProviderStateM
   void _onSpeechResult(SpeechRecognitionResult result) {
     var speechText = result.recognizedWords;
     print(speechText);
-    switch (speechText) {
-      case "Geç":
+    switch (speechText.toLowerCase()) {
+      case "geç":
         audioHandler.skipToNext();
         break;
-      case "Önceki":
+      case "önceki":
         audioHandler.skipToPrevious();
         break;
-      case "Durdur":
+      case "durdur":
         audioHandler.pause();
         break;
-      case "Devam Et":
+      case "devam Et":
         audioHandler.play();
         break;
       default:
