@@ -81,7 +81,7 @@ class _MansionState extends State<Mansion> with AutomaticKeepAliveClientMixin {
                             height: deviceWidth! / 9,
                             child: Center(
                               child: Text(
-                                "Recently Played",
+                                "Son Oynatılanlar",
                                 style: TextStyle(
                                     fontSize: deviceWidth! / 15,
                                     fontWeight: FontWeight.w600,
@@ -220,7 +220,7 @@ class _MansionState extends State<Mansion> with AutomaticKeepAliveClientMixin {
                       height: deviceWidth! / 9,
                       child: Center(
                         child: Text(
-                          "Your Favourite",
+                          "Favorileriniz",
                           style: TextStyle(
                               fontSize: deviceWidth! / 15,
                               fontWeight: FontWeight.w600,
@@ -359,7 +359,7 @@ class _MansionState extends State<Mansion> with AutomaticKeepAliveClientMixin {
                           height: deviceWidth! / 9,
                           child: Center(
                             child: Text(
-                              "Try Something New",
+                              "Yeni Bir şey Dene",
                               style: TextStyle(
                                   fontSize: deviceWidth! / 15,
                                   fontWeight: FontWeight.w600,
@@ -497,7 +497,7 @@ class _MansionState extends State<Mansion> with AutomaticKeepAliveClientMixin {
                       height: deviceWidth! / 9,
                       child: Center(
                         child: Text(
-                          "Favourite Artists",
+                          "Favori Sanatçılar",
                           style: TextStyle(
                               fontSize: deviceWidth! / 15,
                               fontWeight: FontWeight.w600,
@@ -645,7 +645,7 @@ class _MansionState extends State<Mansion> with AutomaticKeepAliveClientMixin {
                       height: deviceWidth! / 9,
                       child: Center(
                         child: Text(
-                          "Favourite Albums",
+                          "Favori Albümler",
                           style: TextStyle(
                             fontSize: deviceWidth! / 15,
                             fontWeight: FontWeight.w600,
