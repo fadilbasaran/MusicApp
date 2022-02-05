@@ -1,21 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:phoenix/src/beginning/utilities/audio_handlers/previous_play_skip.dart';
 import 'package:phoenix/src/beginning/utilities/global_variables.dart';
+import 'package:phoenix/src/beginning/utilities/provider/provider.dart';
 import 'package:phoenix/src/beginning/widgets/custom/graviticons.dart';
 import 'package:phoenix/src/beginning/widgets/custom/marquee.dart';
 import 'package:phoenix/src/beginning/widgets/dialogues/phoenix_visualizer.dart';
 import 'package:phoenix/src/beginning/widgets/now_art.dart';
 import 'package:phoenix/src/beginning/widgets/seek_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+
 import '../../utilities/constants.dart';
 import '../../widgets/dialogues/double_tap.dart';
-import 'package:phoenix/src/beginning/utilities/provider/provider.dart';
-import 'package:flutter/services.dart';
 import '../../widgets/dialogues/on_hold.dart';
-import 'package:phoenix/src/beginning/utilities/audio_handlers/previous_play_skip.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
 
 class NowPlaying extends StatefulWidget {
   const NowPlaying({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class NowPlaying extends StatefulWidget {
 }
 
 class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
+  bool _isListening = false;
   ScrollController stupidController = ScrollController();
   SpeechToText speechController = SpeechToText();
   swapControllerTimeOut() async {
@@ -33,12 +36,41 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
     globalBigNow.rawNotify();
   }
 
+  void startListening() async {
+    setState(() {
+      _isListening = true;
+    });
+    await speechController.listen(
+      onResult: (result) => _onSpeechResult(result),
+    );
+  }
+
+  void _onSpeechResult(SpeechRecognitionResult result) {
+    var speechText = result.recognizedWords;
+    switch (speechText) {
+      case "Geç":
+        audioHandler.skipToNext();
+        break;
+      case "Önceki":
+        audioHandler.skipToPrevious();
+        break;
+      case "Durdur":
+        audioHandler.pause();
+        break;
+      case "Devam Et":
+        audioHandler.play();
+        break;
+      default:
+    }
+    setState(() {
+      _isListening = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    if (!(musicBox.get("isolation") == null
-        ? false
-        : musicBox.get('isolation'))) {
+    if (!(musicBox.get("isolation") == null ? false : musicBox.get('isolation'))) {
       stupidController.addListener(() {
         if (stupidController.offset == stupidController.initialScrollOffset) {
           if (!swapController) {
@@ -57,8 +89,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
       swapController = true;
     }
 
-    animatedPlayPause = AnimationController(
-        vsync: this, duration: Duration(milliseconds: crossfadeDuration));
+    animatedPlayPause = AnimationController(vsync: this, duration: Duration(milliseconds: crossfadeDuration));
   }
 
   @override
@@ -79,12 +110,8 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
             return AnimatedContainer(
               duration: Duration(milliseconds: crossfadeDuration),
               decoration: BoxDecoration(
-                  color: musicBox.get("dynamicArtDB") ?? true
-                      ? nowColor
-                      : kMaterialBlack,
-                  borderRadius: musicBox.get("classix") ?? true
-                      ? null
-                      : radiusFullscreen),
+                  color: musicBox.get("dynamicArtDB") ?? true ? nowColor : kMaterialBlack,
+                  borderRadius: musicBox.get("classix") ?? true ? null : radiusFullscreen),
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (OverscrollIndicatorNotification overscroll) {
                   overscroll.disallowIndicator();
@@ -92,9 +119,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                 } as bool Function(OverscrollIndicatorNotification)?,
                 child: SingleChildScrollView(
                   controller: stupidController,
-                  physics: swapController
-                      ? const NeverScrollableScrollPhysics()
-                      : const ClampingScrollPhysics(),
+                  physics: swapController ? const NeverScrollableScrollPhysics() : const ClampingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Stack(
                     children: [
@@ -105,30 +130,26 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                             Padding(
                               padding: EdgeInsets.only(top: deviceHeight! / 18),
                             ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                    onTapDown: (_) {
-                                      if (!swapController) {
-                                        HapticFeedback.lightImpact();
-                                        swapController = true;
-                                        globalBigNow.rawNotify();
-                                        swapControllerTimeOut();
-                                      }
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: deviceWidth! / 20),
-                                      child: Icon(
-                                        Ionicons.chevron_down_outline,
-                                        size: deviceWidth! / 20,
-                                        color: nowContrast,
-                                      ),
-                                    ),
+                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                              GestureDetector(
+                                onTapDown: (_) {
+                                  if (!swapController) {
+                                    HapticFeedback.lightImpact();
+                                    swapController = true;
+                                    globalBigNow.rawNotify();
+                                    swapControllerTimeOut();
+                                  }
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: deviceWidth! / 20),
+                                  child: Icon(
+                                    Ionicons.chevron_down_outline,
+                                    size: deviceWidth! / 20,
+                                    color: nowContrast,
                                   ),
-                                ]),
+                                ),
+                              ),
+                            ]),
                             Padding(
                               padding: EdgeInsets.only(top: deviceHeight! / 18),
                             ),
@@ -146,8 +167,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                       type: PageTransitionType.size,
                                       alignment: Alignment.center,
                                       duration: dialogueAnimationDuration,
-                                      reverseDuration:
-                                          dialogueAnimationDuration,
+                                      reverseDuration: dialogueAnimationDuration,
                                       child: OnHoldExtended(
                                         context: context,
                                         car: orientedCar,
@@ -170,8 +190,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                       type: PageTransitionType.size,
                                       alignment: Alignment.center,
                                       duration: dialogueAnimationDuration,
-                                      reverseDuration:
-                                          dialogueAnimationDuration,
+                                      reverseDuration: dialogueAnimationDuration,
                                       child: OnHoldExtended(
                                         context: context,
                                         car: orientedCar,
@@ -183,9 +202,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                 },
                               ),
                             ),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(top: deviceHeight! / 40)),
+                            Padding(padding: EdgeInsets.only(top: deviceHeight! / 40)),
                             Column(
                               children: [
                                 Center(
@@ -196,10 +213,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                         text: nowMediaItem.title,
                                         speed: 20,
                                         style: TextStyle(
-                                          color: musicBox.get("dynamicArtDB") ??
-                                                  true
-                                              ? nowContrast
-                                              : Colors.white,
+                                          color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                           fontWeight: FontWeight.w600,
                                           fontSize: deviceHeight! / 35,
                                           height: 1.3,
@@ -227,10 +241,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
                                     style: TextStyle(
-                                      color:
-                                          musicBox.get("dynamicArtDB") ?? true
-                                              ? nowContrast
-                                              : Colors.white,
+                                      color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                       height: 1,
                                       fontSize: deviceHeight! / 60,
                                       shadows: const [
@@ -254,10 +265,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                     nowMediaItem.artist!,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color:
-                                          musicBox.get("dynamicArtDB") ?? true
-                                              ? nowContrast
-                                              : Colors.white,
+                                      color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                       fontSize: deviceHeight! / 60,
                                       shadows: const [
                                         Shadow(
@@ -274,26 +282,19 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                             Padding(
                               padding: EdgeInsets.only(top: deviceHeight! / 90),
                             ),
-                            Center(
-                                child: SizedBox(
-                                    width: deviceWidth! / 1.1,
-                                    child: const SeekBar())),
+                            Center(child: SizedBox(width: deviceWidth! / 1.1, child: const SeekBar())),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(top: deviceHeight! / 100),
+                              padding: EdgeInsets.only(top: deviceHeight! / 100),
                             ),
                             SizedBox(
                               width: deviceWidth! / 1.2,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-                                  Consumer<Leprovider>(
-                                      builder: (context, shuf, _) {
+                                  Consumer<Leprovider>(builder: (context, shuf, _) {
                                     return IconButton(
                                       icon: Icon(Ionicons.shuffle_outline,
-                                          color: musicBox.get("dynamicArtDB") ??
-                                                  true
+                                          color: musicBox.get("dynamicArtDB") ?? true
                                               ? shuffleSelected
                                                   ? nowContrast
                                                   : nowContrast.withOpacity(0.4)
@@ -314,10 +315,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                   IconButton(
                                       icon: Icon(
                                         MdiIcons.skipPrevious,
-                                        color:
-                                            musicBox.get("dynamicArtDB") ?? true
-                                                ? nowContrast
-                                                : Colors.white,
+                                        color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                       ),
                                       iconSize: deviceWidth! / 12,
                                       onPressed: () async {
@@ -327,10 +325,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                       icon: AnimatedIcon(
                                         progress: animatedPlayPause,
                                         icon: AnimatedIcons.pause_play,
-                                        color:
-                                            musicBox.get("dynamicArtDB") ?? true
-                                                ? nowContrast
-                                                : Colors.white,
+                                        color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                       ),
                                       iconSize: deviceWidth! / 9,
                                       alignment: Alignment.center,
@@ -340,23 +335,18 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                   IconButton(
                                     icon: Icon(
                                       MdiIcons.skipNext,
-                                      color:
-                                          musicBox.get("dynamicArtDB") ?? true
-                                              ? nowContrast
-                                              : Colors.white,
+                                      color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                     ),
                                     iconSize: deviceWidth! / 12,
                                     onPressed: () async {
                                       audioHandler.skipToNext();
                                     },
                                   ),
-                                  Consumer<Leprovider>(
-                                      builder: (context, loo, _) {
+                                  Consumer<Leprovider>(builder: (context, loo, _) {
                                     return IconButton(
                                       icon: Icon(
                                         Ionicons.repeat_outline,
-                                        color: musicBox.get("dynamicArtDB") ??
-                                                true
+                                        color: musicBox.get("dynamicArtDB") ?? true
                                             ? loopSelected
                                                 ? nowContrast
                                                 : nowContrast.withOpacity(0.4)
@@ -378,17 +368,14 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                 ],
                               ),
                             ),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(top: deviceHeight! / 38)),
+                            Padding(padding: EdgeInsets.only(top: deviceHeight! / 38)),
                             Consumer<Leprovider>(
                               builder: (context, haunt, _) {
                                 return Center(
                                   child: SizedBox(
                                     width: deviceWidth! / 1.1,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Center(
                                           child: Material(
@@ -400,13 +387,10 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                                 width: deviceWidth! / 8,
                                                 child: Icon(
                                                   Graviticons.phoenix,
-                                                  color: musicBox.get(
-                                                              "dynamicArtDB") ??
-                                                          true
+                                                  color: musicBox.get("dynamicArtDB") ?? true
                                                       ? isFlashin
                                                           ? nowContrast
-                                                          : nowContrast
-                                                              .withOpacity(0.4)
+                                                          : nowContrast.withOpacity(0.4)
                                                       : isFlashin
                                                           ? Colors.white
                                                           : Colors.white38,
@@ -418,16 +402,11 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                                   await Navigator.push(
                                                     context,
                                                     PageTransition(
-                                                      type: PageTransitionType
-                                                          .size,
-                                                      alignment:
-                                                          Alignment.center,
-                                                      duration:
-                                                          dialogueAnimationDuration,
-                                                      reverseDuration:
-                                                          dialogueAnimationDuration,
-                                                      child:
-                                                          const PhoenixVisualizer(),
+                                                      type: PageTransitionType.size,
+                                                      alignment: Alignment.center,
+                                                      duration: dialogueAnimationDuration,
+                                                      reverseDuration: dialogueAnimationDuration,
+                                                      child: const PhoenixVisualizer(),
                                                     ),
                                                   ).then((value) async {
                                                     if (value) {
@@ -443,15 +422,11 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                                 await Navigator.push(
                                                   context,
                                                   PageTransition(
-                                                    type:
-                                                        PageTransitionType.size,
+                                                    type: PageTransitionType.size,
                                                     alignment: Alignment.center,
-                                                    duration:
-                                                        dialogueAnimationDuration,
-                                                    reverseDuration:
-                                                        dialogueAnimationDuration,
-                                                    child:
-                                                        const PhoenixVisualizerCustomize(),
+                                                    duration: dialogueAnimationDuration,
+                                                    reverseDuration: dialogueAnimationDuration,
+                                                    child: const PhoenixVisualizerCustomize(),
                                                   ),
                                                 ).then((value) async {
                                                   setState(() {});
@@ -485,28 +460,17 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                               color: Colors.black26,
                                             ),
                                           ],
-                                          color: musicBox.get("dynamicArtDB") ??
-                                                  true
-                                              ? nowContrast
-                                              : Colors.white)),
+                                          color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white)),
                                 ),
                               ),
                             ),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(top: deviceHeight! / 38)),
+                            Padding(padding: EdgeInsets.only(top: deviceHeight! / 38)),
                             Visibility(
-                              visible: !(musicBox.get("isolation") == null
-                                  ? false
-                                  : musicBox.get('isolation')),
-                              child: Padding(
-                                  padding:
-                                      EdgeInsets.only(top: deviceHeight! / 28)),
+                              visible: !(musicBox.get("isolation") == null ? false : musicBox.get('isolation')),
+                              child: Padding(padding: EdgeInsets.only(top: deviceHeight! / 28)),
                             ),
                             Visibility(
-                              visible: !(musicBox.get("isolation") == null
-                                  ? false
-                                  : musicBox.get('isolation')),
+                              visible: !(musicBox.get("isolation") == null ? false : musicBox.get('isolation')),
                               child: SizedBox(
                                 width: deviceWidth! / 1.1,
                                 child: AspectRatio(
@@ -514,25 +478,17 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                   child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 700),
                                     decoration: BoxDecoration(
-                                      color:
-                                          musicBox.get("dynamicArtDB") ?? true
-                                              ? nowContrast
-                                              : Colors.white,
-                                      borderRadius:
-                                          BorderRadius.circular(kRounded),
+                                      color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
+                                      borderRadius: BorderRadius.circular(kRounded),
                                       boxShadow: [
                                         BoxShadow(
                                           blurRadius: 13.0,
                                           offset: kShadowOffset,
-                                          color: musicBox.get("dynamicArtDB") ??
-                                                  true
-                                              ? Colors.black54
-                                              : Colors.white12,
+                                          color: musicBox.get("dynamicArtDB") ?? true ? Colors.black54 : Colors.white12,
                                         ),
                                       ],
                                     ),
-                                    child: lyricsDat ==
-                                            "Eşleşen şarkı sözü bulunamadı."
+                                    child: lyricsDat == "Eşleşen şarkı sözü bulunamadı."
                                         ? Center(
                                             child: Container(
                                               width: deviceWidth! / 1.05,
@@ -548,17 +504,14 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                                     fontSize: deviceWidth! / 18,
                                                     fontFamily: "Raleway",
                                                     fontWeight: FontWeight.w600,
-                                                    color: musicBox.get(
-                                                                "dynamicArtDB") ??
-                                                            true
+                                                    color: musicBox.get("dynamicArtDB") ?? true
                                                         ? nowColor
                                                         : kMaterialBlack,
                                                   )),
                                             ),
                                           )
                                         : SingleChildScrollView(
-                                            physics:
-                                                const BouncingScrollPhysics(),
+                                            physics: const BouncingScrollPhysics(),
                                             scrollDirection: Axis.vertical,
                                             child: Container(
                                               width: deviceWidth! / 1.05,
@@ -575,11 +528,8 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                                   fontSize: deviceWidth! / 18,
                                                   fontFamily: "Raleway",
                                                   fontWeight: FontWeight.w600,
-                                                  color: musicBox.get(
-                                                              "dynamicArtDB") ??
-                                                          true
-                                                      ? nowColor
-                                                      : kMaterialBlack,
+                                                  color:
+                                                      musicBox.get("dynamicArtDB") ?? true ? nowColor : kMaterialBlack,
                                                 ),
                                               ),
                                             ),
@@ -588,9 +538,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                 ),
                               ),
                             ),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(top: deviceHeight! / 30)),
+                            Padding(padding: EdgeInsets.only(top: deviceHeight! / 30)),
                           ],
                         ),
                       ),
@@ -601,9 +549,6 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
             );
           })
 
-
-
-          
 //Landscape Screen
         : Consumer<MrMan>(
             builder: (context, bignow, child) {
@@ -611,12 +556,8 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
               return AnimatedContainer(
                 duration: Duration(milliseconds: crossfadeDuration),
                 decoration: BoxDecoration(
-                    color: musicBox.get("dynamicArtDB") ?? true
-                        ? nowColor
-                        : kMaterialBlack,
-                    borderRadius: musicBox.get("classix") ?? true
-                        ? null
-                        : radiusFullscreen),
+                    color: musicBox.get("dynamicArtDB") ?? true ? nowColor : kMaterialBlack,
+                    borderRadius: musicBox.get("classix") ?? true ? null : radiusFullscreen),
                 child: NotificationListener<OverscrollIndicatorNotification>(
                   onNotification: (OverscrollIndicatorNotification overscroll) {
                     overscroll.disallowIndicator();
@@ -624,9 +565,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                   } as bool Function(OverscrollIndicatorNotification)?,
                   child: SingleChildScrollView(
                     controller: stupidController,
-                    physics: swapController
-                        ? const NeverScrollableScrollPhysics()
-                        : const ClampingScrollPhysics(),
+                    physics: swapController ? const NeverScrollableScrollPhysics() : const ClampingScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     child: Column(
                       children: [
@@ -634,9 +573,8 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Visibility(
-                              visible: musicBox.get("androidAutoLefty") == null
-                                  ? false
-                                  : !musicBox.get("androidAutoLefty"),
+                              visible:
+                                  musicBox.get("androidAutoLefty") == null ? false : !musicBox.get("androidAutoLefty"),
                               child: SizedBox(
                                 width: deviceHeight! / 2,
                                 child: GestureDetector(
@@ -652,8 +590,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                         type: PageTransitionType.size,
                                         alignment: Alignment.center,
                                         duration: dialogueAnimationDuration,
-                                        reverseDuration:
-                                            dialogueAnimationDuration,
+                                        reverseDuration: dialogueAnimationDuration,
                                         child: OnHoldExtended(
                                           context: context,
                                           car: orientedCar,
@@ -674,8 +611,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                         type: PageTransitionType.size,
                                         alignment: Alignment.center,
                                         duration: dialogueAnimationDuration,
-                                        reverseDuration:
-                                            dialogueAnimationDuration,
+                                        reverseDuration: dialogueAnimationDuration,
                                         child: OnHoldExtended(
                                           context: context,
                                           car: orientedCar,
@@ -704,11 +640,8 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                               text: nowMediaItem.title,
                                               speed: 20,
                                               style: TextStyle(
-                                                color: musicBox.get(
-                                                            "dynamicArtDB") ??
-                                                        true
-                                                    ? nowContrast
-                                                    : Colors.white,
+                                                color:
+                                                    musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: deviceHeight! / 35,
                                                 height: 1.3,
@@ -736,11 +669,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                           textAlign: TextAlign.center,
                                           maxLines: 1,
                                           style: TextStyle(
-                                            color:
-                                                musicBox.get("dynamicArtDB") ??
-                                                        true
-                                                    ? nowContrast
-                                                    : Colors.white,
+                                            color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                             height: 1,
                                             fontSize: deviceHeight! / 60,
                                             shadows: const [
@@ -764,11 +693,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                           nowMediaItem.artist!,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color:
-                                                musicBox.get("dynamicArtDB") ??
-                                                        true
-                                                    ? nowContrast
-                                                    : Colors.white,
+                                            color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                             fontSize: deviceHeight! / 60,
                                             shadows: const [
                                               Shadow(
@@ -783,36 +708,26 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        top: deviceHeight! / 90),
+                                    padding: EdgeInsets.only(top: deviceHeight! / 90),
                                   ),
-                                  Center(
-                                      child: SizedBox(
-                                          width: deviceHeight! / 2 / 1.1,
-                                          child: const SeekBar())),
+                                  Center(child: SizedBox(width: deviceHeight! / 2 / 1.1, child: const SeekBar())),
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        top: deviceHeight! / 100),
+                                    padding: EdgeInsets.only(top: deviceHeight! / 100),
                                   ),
                                   SizedBox(
                                     width: deviceHeight! / 2,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
-                                        Consumer<Leprovider>(
-                                            builder: (context, shuf, _) {
+                                        Consumer<Leprovider>(builder: (context, shuf, _) {
                                           return IconButton(
                                             icon: Icon(
                                                 // MdiIcons.shuffle,
                                                 Ionicons.shuffle_outline,
-                                                color: musicBox.get(
-                                                            "dynamicArtDB") ??
-                                                        true
+                                                color: musicBox.get("dynamicArtDB") ?? true
                                                     ? shuffleSelected
                                                         ? nowContrast
-                                                        : nowContrast
-                                                            .withOpacity(0.4)
+                                                        : nowContrast.withOpacity(0.4)
                                                     : shuffleSelected
                                                         ? Colors.white
                                                         : Colors.white38),
@@ -830,11 +745,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                         IconButton(
                                             icon: Icon(
                                               MdiIcons.skipPrevious,
-                                              color: musicBox.get(
-                                                          "dynamicArtDB") ??
-                                                      true
-                                                  ? nowContrast
-                                                  : Colors.white,
+                                              color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                             ),
                                             iconSize: deviceHeight! / 23,
                                             onPressed: () async {
@@ -844,11 +755,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                             icon: AnimatedIcon(
                                               progress: animatedPlayPause,
                                               icon: AnimatedIcons.pause_play,
-                                              color: musicBox.get(
-                                                          "dynamicArtDB") ??
-                                                      true
-                                                  ? nowContrast
-                                                  : Colors.white,
+                                              color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                             ),
                                             iconSize: deviceHeight! / 18,
                                             alignment: Alignment.center,
@@ -858,29 +765,21 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                         IconButton(
                                           icon: Icon(
                                             MdiIcons.skipNext,
-                                            color:
-                                                musicBox.get("dynamicArtDB") ??
-                                                        true
-                                                    ? nowContrast
-                                                    : Colors.white,
+                                            color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                           ),
                                           iconSize: deviceHeight! / 23,
                                           onPressed: () async {
                                             audioHandler.skipToNext();
                                           },
                                         ),
-                                        Consumer<Leprovider>(
-                                            builder: (context, loo, _) {
+                                        Consumer<Leprovider>(builder: (context, loo, _) {
                                           return IconButton(
                                             icon: Icon(
                                               Ionicons.repeat_outline,
-                                              color: musicBox.get(
-                                                          "dynamicArtDB") ??
-                                                      true
+                                              color: musicBox.get("dynamicArtDB") ?? true
                                                   ? loopSelected
                                                       ? nowContrast
-                                                      : nowContrast
-                                                          .withOpacity(0.4)
+                                                      : nowContrast.withOpacity(0.4)
                                                   : loopSelected
                                                       ? Colors.white
                                                       : Colors.white38,
@@ -896,44 +795,39 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                             },
                                           );
                                         }),
+                                        IconButton(
+                                          onPressed: () => startListening(),
+                                          icon: Icon(_isListening ? Icons.mic_off_outlined : Icons.mic),
+                                        )
                                       ],
                                     ),
                                   ),
-                                  Padding(
-                                      padding: EdgeInsets.only(
-                                          top: deviceHeight! / 38)),
+                                  Padding(padding: EdgeInsets.only(top: deviceHeight! / 38)),
                                   Consumer<Leprovider>(
                                     builder: (context, haunt, _) {
                                       return Center(
                                         child: SizedBox(
                                           width: deviceWidth! / 1.1,
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Center(
                                                 child: Material(
                                                   color: Colors.transparent,
                                                   child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
+                                                    splashColor: Colors.transparent,
                                                     child: SizedBox(
                                                       height: deviceWidth! / 8,
                                                       width: deviceWidth! / 8,
                                                       child: Icon(
                                                         Graviticons.phoenix,
-                                                        color: musicBox.get(
-                                                                    "dynamicArtDB") ??
-                                                                true
+                                                        color: musicBox.get("dynamicArtDB") ?? true
                                                             ? isFlashin
                                                                 ? nowContrast
-                                                                : nowContrast
-                                                                    .withOpacity(
-                                                                        0.4)
+                                                                : nowContrast.withOpacity(0.4)
                                                             : isFlashin
                                                                 ? Colors.white
-                                                                : Colors
-                                                                    .white38,
+                                                                : Colors.white38,
                                                         size: deviceWidth! / 13,
                                                       ),
                                                     ),
@@ -942,17 +836,11 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                                         await Navigator.push(
                                                           context,
                                                           PageTransition(
-                                                            type:
-                                                                PageTransitionType
-                                                                    .size,
-                                                            alignment: Alignment
-                                                                .center,
-                                                            duration:
-                                                                dialogueAnimationDuration,
-                                                            reverseDuration:
-                                                                dialogueAnimationDuration,
-                                                            child:
-                                                                const PhoenixVisualizer(),
+                                                            type: PageTransitionType.size,
+                                                            alignment: Alignment.center,
+                                                            duration: dialogueAnimationDuration,
+                                                            reverseDuration: dialogueAnimationDuration,
+                                                            child: const PhoenixVisualizer(),
                                                           ),
                                                         ).then((value) async {
                                                           setState(() {});
@@ -967,17 +855,11 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                                         await Navigator.push(
                                                           context,
                                                           PageTransition(
-                                                            type:
-                                                                PageTransitionType
-                                                                    .size,
-                                                            alignment: Alignment
-                                                                .center,
-                                                            duration:
-                                                                dialogueAnimationDuration,
-                                                            reverseDuration:
-                                                                dialogueAnimationDuration,
-                                                            child:
-                                                                const PhoenixVisualizer(),
+                                                            type: PageTransitionType.size,
+                                                            alignment: Alignment.center,
+                                                            duration: dialogueAnimationDuration,
+                                                            reverseDuration: dialogueAnimationDuration,
+                                                            child: const PhoenixVisualizer(),
                                                           ),
                                                         ).then((value) async {
                                                           if (value) {
@@ -999,8 +881,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                     },
                                   ),
                                   Visibility(
-                                    visible:
-                                        musicBox.get("audiophileData") ?? true,
+                                    visible: musicBox.get("audiophileData") ?? true,
                                     child: Center(
                                       child: Container(
                                         alignment: Alignment.center,
@@ -1018,11 +899,8 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                                     color: Colors.black26,
                                                   ),
                                                 ],
-                                                color: musicBox.get(
-                                                            "dynamicArtDB") ??
-                                                        true
-                                                    ? nowContrast
-                                                    : Colors.white)),
+                                                color:
+                                                    musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white)),
                                       ),
                                     ),
                                   ),
@@ -1030,9 +908,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                               ),
                             ),
                             Visibility(
-                              visible: musicBox.get("androidAutoLefty") ?? true
-                                  ? true
-                                  : false,
+                              visible: musicBox.get("androidAutoLefty") ?? true ? true : false,
                               child: SizedBox(
                                 width: deviceHeight! / 2,
                                 child: GestureDetector(
@@ -1050,8 +926,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                         type: PageTransitionType.size,
                                         alignment: Alignment.center,
                                         duration: dialogueAnimationDuration,
-                                        reverseDuration:
-                                            dialogueAnimationDuration,
+                                        reverseDuration: dialogueAnimationDuration,
                                         child: OnHoldExtended(
                                           context: context,
                                           car: orientedCar,
@@ -1066,42 +941,30 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                             ),
                           ],
                         ),
-                        Padding(
-                            padding: EdgeInsets.only(top: deviceHeight! / 38)),
+                        Padding(padding: EdgeInsets.only(top: deviceHeight! / 38)),
                         Visibility(
-                          visible: !(musicBox.get("isolation") == null
-                              ? false
-                              : musicBox.get('isolation')),
-                          child: Padding(
-                              padding:
-                                  EdgeInsets.only(top: deviceHeight! / 28)),
+                          visible: !(musicBox.get("isolation") == null ? false : musicBox.get('isolation')),
+                          child: Padding(padding: EdgeInsets.only(top: deviceHeight! / 28)),
                         ),
                         Visibility(
-                          visible: !(musicBox.get("isolation") == null
-                              ? false
-                              : musicBox.get('isolation')),
+                          visible: !(musicBox.get("isolation") == null ? false : musicBox.get('isolation')),
                           child: SizedBox(
                             height: deviceWidth,
                             width: deviceHeight! / 2,
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 700),
                               decoration: BoxDecoration(
-                                color: musicBox.get("dynamicArtDB") ?? true
-                                    ? nowContrast
-                                    : Colors.white,
+                                color: musicBox.get("dynamicArtDB") ?? true ? nowContrast : Colors.white,
                                 borderRadius: BorderRadius.circular(kRounded),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: musicBox.get("dynamicArtDB") ?? true
-                                        ? Colors.black54
-                                        : Colors.white12,
+                                    color: musicBox.get("dynamicArtDB") ?? true ? Colors.black54 : Colors.white12,
                                     offset: kShadowOffset,
                                     blurRadius: 13.0,
                                   ),
                                 ],
                               ),
-                              child: lyricsDat ==
-                                      "Eşleşen şarkı sözü bulunamadı."
+                              child: lyricsDat == "Eşleşen şarkı sözü bulunamadı."
                                   ? Center(
                                       child: Container(
                                         width: deviceWidth! / 1.05,
@@ -1117,11 +980,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                               fontSize: deviceWidth! / 18,
                                               fontFamily: "Raleway",
                                               fontWeight: FontWeight.w600,
-                                              color: musicBox.get(
-                                                          "dynamicArtDB") ??
-                                                      true
-                                                  ? nowColor
-                                                  : kMaterialBlack,
+                                              color: musicBox.get("dynamicArtDB") ?? true ? nowColor : kMaterialBlack,
                                             )),
                                       ),
                                     )
@@ -1142,11 +1001,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                               fontSize: deviceWidth! / 18,
                                               fontFamily: "Raleway",
                                               fontWeight: FontWeight.w600,
-                                              color: musicBox.get(
-                                                          "dynamicArtDB") ??
-                                                      true
-                                                  ? nowColor
-                                                  : kMaterialBlack,
+                                              color: musicBox.get("dynamicArtDB") ?? true ? nowColor : kMaterialBlack,
                                             )),
                                       ),
                                     ),
@@ -1154,9 +1009,7 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                           ),
                         ),
                         Visibility(
-                          visible: !(musicBox.get("isolation") == null
-                              ? false
-                              : musicBox.get('isolation')),
+                          visible: !(musicBox.get("isolation") == null ? false : musicBox.get('isolation')),
                           child: Padding(
                             padding: EdgeInsets.only(
                               bottom: deviceWidth! * 1.03,
