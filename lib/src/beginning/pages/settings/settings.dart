@@ -1,4 +1,4 @@
-import 'package:phoenix/src/beginning/pages/settings/settings_pages/changelogs.dart';
+//import 'package:phoenix/src/beginning/pages/settings/settings_pages/changelogs.dart';
 import 'package:phoenix/src/beginning/pages/settings/settings_pages/interface.dart';
 import 'package:phoenix/src/beginning/pages/settings/settings_pages/phoenix.dart';
 import 'package:phoenix/src/beginning/utilities/global_variables.dart';
@@ -13,10 +13,9 @@ import 'settings_pages/miscellaneous.dart';
 bool breakRotate = false;
 bool onSettings = false;
 List settingsList = [
-  "INTERFACE",
-  "MISCELLANEOUS",
-  "CHANGELOGS",
-  "PHOENIX",
+  "ARAYÜZ",
+  "TERCİHLER",
+  "MUSIC APP",
 ];
 late var globalRotational;
 
@@ -149,25 +148,7 @@ class _SettingsState extends State<Settings> {
                                                       ).then((value) {
                                                         setState(() {});
                                                       });
-                                                    } else if (i == 2) {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          maintainState: false,
-                                                          builder: (context) =>
-                                                              ChangeNotifierProvider<
-                                                                  Leprovider>(
-                                                            create: (_) =>
-                                                                Leprovider(),
-                                                            builder: (context,
-                                                                    child) =>
-                                                                const Changelogs(),
-                                                          ),
-                                                        ),
-                                                      ).then((value) {
-                                                        setState(() {});
-                                                      });
-                                                    } else if (i == 3) {
+                                                    }  else if (i == 2) {
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -238,7 +219,7 @@ class _SettingsState extends State<Settings> {
                           ),
                           centerTitle: true,
                           title: Text(
-                            "SETTINGS",
+                            "AYARLAR",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 fontFamily: "Futura",

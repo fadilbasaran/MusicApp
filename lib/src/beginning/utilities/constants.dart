@@ -31,15 +31,12 @@ BoxShadow nowArtShadow =
 
 /// Aesthetic Quotes.
 Map quotes = {
-  "I don't wanna believe. I wanna Know.": "Carl Sagan",
-  "The truth is like a black bouquet, Money's got us all enslaved, the bullets and the bombs we make, oh, no.":
+  "İnanmak istemiyorum. Bilmek istiyorum.": "Carl Sagan",
+  "Gerçek şu ki, siyah bir buket gibi, Para hepimizi köleleştirdi, yaptığımız kurşunlar ve bombalar, oh, hayır.":
       "Stephen Swartz",
-  "I don't care for your drugs, I don't care for your fame. Do you care for the truth if you're not entertained?":
+  "Hiçbir çocuğumuz açlıktan ölmemeli, bizim için ölmemeli.":
       "Stephen Swartz",
-  "No child of ours should have to starve, should have to die for us.":
-      "Stephen Swartz",
-  "What I cannot create, I do not understand.": "Richard Feynman",
-  "Can I trust what I'm given? \n When faith still needs a gun.":
+  "Bana verilene güvenebilir miyim?\n İnanç hala bir silaha ihtiyaç duyduğunda.":
       "Stephen Swartz"
 };
 
@@ -50,7 +47,8 @@ Map<String, String> changelogs = {
       "• Add option to change default artwork.\n• Add option to change glass look.\n• Add pull to refresh.",
   "FORTRESS - 2.2.0":
       "• Biggest update ever — literally, app is almost thrice the size it used to be.\n• Add ringtone/crossfade/trim.\n• New search UI.\n• New now playing design.\n• Wider lyrics support.\n• Progress bar in mini-playing.\n• Performance improvements.\n• Minor UI changes.\n• Accurate artworks for songs.\n• Support editing songs for all android versions.\n• Smoother seekbar.",
-  "PERSEUS - 2.3.0": "• Upstream everything.\n• Fix crashes during loading.\n• Sort music in albums with date."
+  "PERSEUS - 2.3.0":
+      "• Upstream everything.\n• Fix crashes during loading.\n• Sort music in albums with date."
 };
 
 /// Theme data of entire app

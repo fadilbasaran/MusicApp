@@ -74,7 +74,7 @@ class _PhoenixVisualizerState extends State<PhoenixVisualizer> {
                                           color: Colors.white,
                                           fontSize: deviceHeight! / 60,
                                         ),
-                                        bottomLabelText: 'SENSITIVITY',
+                                        bottomLabelText: 'HASSASİYET',
                                         mainLabelStyle: TextStyle(
                                             color: Colors.white,
                                             fontSize: deviceHeight! / 40,
@@ -126,7 +126,7 @@ class _PhoenixVisualizerState extends State<PhoenixVisualizer> {
                                             BorderRadius.circular(kRounded),
                                       ),
                                       child: Center(
-                                        child: Text("START",
+                                        child: Text("BAŞLA",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: Colors.black,
@@ -241,7 +241,7 @@ class _PhoenixVisualizerCustomizeState
                                           color: Colors.white,
                                           fontSize: deviceHeight! / 60,
                                         ),
-                                        bottomLabelText: 'SENSITIVITY',
+                                        bottomLabelText: 'HASSASİYET',
                                         mainLabelStyle: TextStyle(
                                             color: Colors.white,
                                             fontSize: deviceHeight! / 40,
@@ -282,7 +282,7 @@ class _PhoenixVisualizerCustomizeState
                                             BorderRadius.circular(kRounded),
                                       ),
                                       child: Center(
-                                        child: Text("DONE",
+                                        child: Text("TAMAMLA",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: Colors.black,
@@ -379,7 +379,7 @@ class _PhoenixVisualizerGlobalState extends State<PhoenixVisualizerGlobal> {
                                           color: Colors.white,
                                           fontSize: deviceHeight! / 60,
                                         ),
-                                        bottomLabelText: 'SENSITIVITY',
+                                        bottomLabelText: 'HASSASİYET',
                                         mainLabelStyle: TextStyle(
                                             color: Colors.white,
                                             fontSize: deviceHeight! / 40,
@@ -426,7 +426,7 @@ class _PhoenixVisualizerGlobalState extends State<PhoenixVisualizerGlobal> {
                                             BorderRadius.circular(kRounded),
                                       ),
                                       child: Center(
-                                        child: Text("START",
+                                        child: Text("BAŞLA",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.black,
@@ -442,7 +442,7 @@ class _PhoenixVisualizerGlobalState extends State<PhoenixVisualizerGlobal> {
                                       left: deviceWidth! / 10,
                                       right: deviceWidth! / 10),
                                   child: Text(
-                                    "NOTE: This will run in the background until stopped, causing battery drain",
+                                    "NOT: Bu, durdurulana kadar arka planda çalışacak ve pilin bitmesine neden olacaktır.",
                                     textAlign: TextAlign.center,
                                     maxLines: 2,
                                     style: TextStyle(

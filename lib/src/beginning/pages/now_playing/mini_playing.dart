@@ -221,7 +221,9 @@ class _ClassixState extends State<Classix> {
                                 ? CrossFadeState.showFirst
                                 : CrossFadeState.showSecond,
                           ),
+                          
                         ),
+                       
                       ],
                     ),
                     Positioned.fill(
@@ -288,6 +290,7 @@ class _ClassixState extends State<Classix> {
                                           ],
                                         ),
                                       ),
+                                    
                                     ],
                                   ),
                                 ),

@@ -4,7 +4,7 @@ import 'package:phoenix/src/beginning/utilities/global_variables.dart';
 
 corruptedFile(BuildContext context) async {
   Flushbar(
-    messageText: const Text("Can't play a corrupted file!",
+    messageText: const Text("Bozuk bir dosya oynatılamıyor!",
         style: TextStyle(fontFamily: "Futura", color: Colors.white)),
     icon: const Icon(
       Icons.error_outline,

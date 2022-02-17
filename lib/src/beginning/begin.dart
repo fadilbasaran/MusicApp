@@ -178,7 +178,7 @@ class _BeginState extends State<Begin>
                                     Visibility(
                                       visible: stackedPhoenix,
                                       child: Text(
-                                        "  PHOENIX",
+                                        "  Music App",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: orientedCar
@@ -193,7 +193,7 @@ class _BeginState extends State<Begin>
                                       child: AnimatedTextKit(
                                         animatedTexts: [
                                           TypewriterAnimatedText(
-                                            "  PHOENIX",
+                                            "  Music App",
                                             cursor: " ",
                                             speed: const Duration(
                                                 milliseconds: 70),
@@ -526,7 +526,7 @@ class _BeginState extends State<Begin>
             break;
         }
       },
-      messageText: const Text("Go back once more to exit",
+      messageText: const Text("Çıkmak için bir kez daha geri dönün",
           style: TextStyle(fontFamily: "Futura", color: Colors.white)),
       icon: const Icon(
         Icons.exit_to_app_rounded,

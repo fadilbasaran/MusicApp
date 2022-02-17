@@ -8,7 +8,7 @@ List<Tab> tabsData(double width, double? height) {
   return [
     Tab(
       child: Text(
-        "MANSION",
+        "GEZİNTİLER",
         style: TextStyle(
           fontSize: tabBarFontSize,
           letterSpacing: letterspace,
@@ -19,7 +19,7 @@ List<Tab> tabsData(double width, double? height) {
     ),
     Tab(
       child: Text(
-        "TRACKS",
+        "ŞARKILAR",
         style: TextStyle(
           letterSpacing: letterspace,
           fontSize: tabBarFontSize,
@@ -30,7 +30,7 @@ List<Tab> tabsData(double width, double? height) {
     ),
     Tab(
       child: Text(
-        "ALBUMS",
+        "ALBÜMLER",
         style: TextStyle(
           letterSpacing: letterspace,
           fontSize: tabBarFontSize,
@@ -41,7 +41,7 @@ List<Tab> tabsData(double width, double? height) {
     ),
     Tab(
       child: Text(
-        "ARTISTS",
+        "SANATÇILAR",
         style: TextStyle(
           letterSpacing: letterspace,
           fontSize: tabBarFontSize,
@@ -52,7 +52,7 @@ List<Tab> tabsData(double width, double? height) {
     ),
     Tab(
       child: Text(
-        "GENRES",
+        "TÜRLER",
         style: TextStyle(
           letterSpacing: letterspace,
           fontSize: tabBarFontSize,
@@ -63,7 +63,7 @@ List<Tab> tabsData(double width, double? height) {
     ),
     Tab(
       child: Text(
-        "PLAYLISTS",
+        "ÇALMA LİSTELERİ",
         style: TextStyle(
           letterSpacing: letterspace,
           fontSize: tabBarFontSize,

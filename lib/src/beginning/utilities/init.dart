@@ -103,7 +103,6 @@ fetchAll() async {
   if (musicBox.get("isolation") == null
       ? true
       : !musicBox.get("isolation") && await hasNetwork()) {
-    /// TODO do scraping only when phone's awake so you don't get HandshakeException: Connection terminated during handshake
     isolatedArtistScrapeInit();
   }
   Begin.isLoading = false;

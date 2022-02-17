@@ -8,7 +8,7 @@ visualizerNotificationInit() async {
       NotificationChannel(
         channelKey: 'phoenix_visualize',
         channelName: 'Phoenix Visualizer',
-        channelDescription: 'Phoenix Visualizer Running Alert',
+        channelDescription: 'Phoenix Visualizer Çalıştırma Uyarısı',
         enableLights: false,
         enableVibration: false,
         importance: NotificationImportance.Default,
@@ -33,8 +33,8 @@ startVisualizerNotification() async {
       id: 69,
       channelKey: 'phoenix_visualize',
       locked: true,
-      title: 'Phoenix Visualizing Music',
-      body: 'Running in background',
+      title: 'Phoenix Visualizing Müzik',
+      body: 'Arka planda çalışan',
       backgroundColor: Colors.black,
     ),
   );

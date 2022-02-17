@@ -98,7 +98,7 @@ class _AddToPlaylistState extends State<AddToPlaylist> {
                                                         widget.songFile)) {
                                                   Flushbar(
                                                     messageText: const Text(
-                                                        "Song Already In Playlist",
+                                                        "Şarkı Zaten Çalma Listesinde",
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Futura",
@@ -144,7 +144,7 @@ class _AddToPlaylistState extends State<AddToPlaylist> {
                                                       "playlists", widget.data);
                                                   Flushbar(
                                                     messageText: const Text(
-                                                        "Song Added To Playlist",
+                                                        "Şarkı Çalma Listesine Eklendi",
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Futura",

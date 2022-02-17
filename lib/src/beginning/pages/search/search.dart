@@ -188,7 +188,7 @@ class _SearchinState extends State<Searchin> {
                                     hintStyle:
                                         TextStyle(color: Colors.grey[350]),
                                     hintText:
-                                        "Search for songs,albums,artists...",
+                                        "Şarkıları, albümleri, sanatçıları arayın...",
                                   ),
                                 ),
                               ),
@@ -229,7 +229,7 @@ class _SearchinState extends State<Searchin> {
                                               child: SizedBox(
                                                 height: deviceWidth! / 9,
                                                 child: Text(
-                                                  "Albums",
+                                                  "Albümler",
                                                   style: TextStyle(
                                                       fontSize:
                                                           deviceWidth! / 15,
@@ -438,7 +438,7 @@ class _SearchinState extends State<Searchin> {
                                               child: SizedBox(
                                                 height: deviceWidth! / 9,
                                                 child: Text(
-                                                  "Artists",
+                                                  "Sanatçılar",
                                                   style: TextStyle(
                                                       fontSize:
                                                           deviceWidth! / 15,
@@ -653,7 +653,7 @@ class _SearchinState extends State<Searchin> {
                                         child: SizedBox(
                                           height: deviceWidth! / 9,
                                           child: Text(
-                                            "Tracks",
+                                            "Şarkılar",
                                             style: TextStyle(
                                                 fontSize: deviceWidth! / 15,
                                                 fontWeight: FontWeight.w600,

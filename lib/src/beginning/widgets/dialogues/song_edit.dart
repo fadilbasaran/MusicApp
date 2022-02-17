@@ -136,7 +136,7 @@ class _SongEditState extends State<SongEdit> with TickerProviderStateMixin {
                                       filled: true,
                                       hintStyle:
                                           TextStyle(color: Colors.grey[350]),
-                                      labelText: "TITLE",
+                                      labelText: "BAŞLIK",
                                       hintText: "",
                                       labelStyle: TextStyle(
                                         color: Colors.grey[350],
@@ -190,7 +190,7 @@ class _SongEditState extends State<SongEdit> with TickerProviderStateMixin {
                                       filled: true,
                                       hintStyle:
                                           TextStyle(color: Colors.grey[350]),
-                                      labelText: "ALBUM",
+                                      labelText: "ALBÜM",
                                       labelStyle: TextStyle(
                                         color: Colors.grey[350],
                                       ),
@@ -244,7 +244,7 @@ class _SongEditState extends State<SongEdit> with TickerProviderStateMixin {
                                       filled: true,
                                       hintStyle:
                                           TextStyle(color: Colors.grey[350]),
-                                      labelText: "ARTIST",
+                                      labelText: "SANATÇILAR",
                                       labelStyle: TextStyle(
                                         color: Colors.grey[350],
                                       ),
@@ -299,7 +299,7 @@ class _SongEditState extends State<SongEdit> with TickerProviderStateMixin {
                                       filled: true,
                                       hintStyle:
                                           TextStyle(color: Colors.grey[350]),
-                                      labelText: "GENRE",
+                                      labelText: "TARZ",
                                       labelStyle: TextStyle(
                                         color: Colors.grey[350],
                                       ),
@@ -359,7 +359,7 @@ class _SongEditState extends State<SongEdit> with TickerProviderStateMixin {
                                         BorderRadius.circular(kRounded),
                                   ),
                                   child: Center(
-                                    child: Text("DONE",
+                                    child: Text("TAMAMLA",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.black,

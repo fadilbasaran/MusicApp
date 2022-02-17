@@ -24,7 +24,7 @@ dependencies:
     sdk: flutter
 
 
-  # UI Related
+  # UI Related(Kullanıcı Arayüzü ile İlgili)
   another_flushbar: ^1.10.28
   animated_text_kit: ^4.2.1
   another_xlider: ^1.0.0
@@ -37,7 +37,7 @@ dependencies:
   speech_to_text: ^5.4.2
 
 
-  # AUDIO Related
+  # AUDIO Related(Ses ile ilgili)
   audio_service: ^0.18.3
   flutter_ffmpeg: ^0.4.2
   just_audio: ^0.9.18
@@ -45,7 +45,7 @@ dependencies:
   on_audio_query: '2.5.3'
 
 
-  # FLUTTER Related
+  # FLUTTER Related(Flutter İle ilgili)
   device_info: ^2.0.3
   # flutter_isolate: ^2.0.1-pre
   image_picker: ^0.8.4+4
@@ -55,12 +55,12 @@ dependencies:
   share_plus: ^3.0.4
 
 
-  # DATABASE Related
+  # DATABASE Related(Veri tabanı ile ilgili)
   hive: ^2.0.5
   hive_flutter: ^1.1.0
 
 
-  # ICONS Related
+  # ICONS Related(İkon ile ilgili)
   cupertino_icons: ^1.0.4
   flutter_launcher_icons: ^0.9.2
   flutter_remixicon:
@@ -69,7 +69,7 @@ dependencies:
   material_design_icons_flutter: ^5.0.6595
 
 
-  # WEB Related
+  # WEB Related (Web İle ilgili)
   html: ^0.15.0
   html_unescape: ^2.0.0
   url_launcher: ^6.0.18

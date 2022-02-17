@@ -194,7 +194,7 @@ class _OnHoldState extends State<OnHold> {
                                                       .isEmpty) {
                                                     Flushbar(
                                                       messageText: const Text(
-                                                          "Create A Playlist First.",
+                                                          "Önce Bir Oynatma Listesi Oluşturun.",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Futura",
@@ -356,7 +356,7 @@ class _OnHoldState extends State<OnHold> {
                                                   } catch (e) {
                                                     Flushbar(
                                                       message:
-                                                          "The File Might be Unsupported/Corrupted.",
+                                                          "Dosya Desteklenmiyor/Bozuk Olabilir.",
                                                       icon: const Icon(
                                                         Icons.info_outline,
                                                         size: 28.0,
@@ -592,7 +592,7 @@ class _OnHoldExtendedState extends State<OnHoldExtended> {
                                                     Navigator.pop(context);
                                                     Flushbar(
                                                       messageText: const Text(
-                                                          "Removed From Liked Songs",
+                                                          "Beğenilen Şarkılardan Kaldırıldı",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Futura",
@@ -637,7 +637,7 @@ class _OnHoldExtendedState extends State<OnHoldExtended> {
                                                     Navigator.pop(context);
                                                     Flushbar(
                                                       messageText: const Text(
-                                                          "Added To Liked Songs",
+                                                          "Beğenilen Şarkılara Eklendi",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Futura",
@@ -687,7 +687,7 @@ class _OnHoldExtendedState extends State<OnHoldExtended> {
                                                       .isEmpty) {
                                                     Flushbar(
                                                       messageText: const Text(
-                                                          "Create A Playlist First.",
+                                                          "Önce Bir Çalma Listesi Oluşturun.",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Futura",
@@ -805,7 +805,7 @@ class _OnHoldExtendedState extends State<OnHoldExtended> {
                                                   } catch (e) {
                                                     Flushbar(
                                                       message:
-                                                          "The File Might be Unsupported/Corrupted.",
+                                                          "Dosya Desteklenmiyor/Bozuk Olabilir.",
                                                       icon: const Icon(
                                                         Icons.info_outline,
                                                         size: 28.0,
@@ -878,7 +878,7 @@ class _OnHoldExtendedState extends State<OnHoldExtended> {
 
                                                     Flushbar(
                                                       messageText: const Text(
-                                                          "Saved In Downloads Directory",
+                                                          "İndirilenler Dizinine Kaydedildi",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Futura",
@@ -954,8 +954,8 @@ class _OnHoldExtendedState extends State<OnHoldExtended> {
                                                     i == 1
                                                         ? !isSongLiked(
                                                                 nowMediaItem.id)
-                                                            ? "Remove From Liked Songs"
-                                                            : "Add to Liked Songs"
+                                                            ? "Beğenilen Şarkılardan Kaldır"
+                                                            : "Beğenilen Şarkılara Ekle"
                                                         : songMoreInfoNP[i],
                                                     maxLines: 2,
                                                     style: TextStyle(

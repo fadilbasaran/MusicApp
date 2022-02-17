@@ -52,7 +52,7 @@ class _MiscellaneousState extends State<Miscellaneous> {
             centerTitle: true,
             backgroundColor: Colors.transparent,
             title: Text(
-              "Miscellaneous",
+              "Tercihler",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: deviceWidth! / 18,
@@ -82,14 +82,14 @@ class _MiscellaneousState extends State<Miscellaneous> {
                           checkColor:
                               darkModeOn ? kMaterialBlack : Colors.white,
                           subtitle: Text(
-                            "Don't show music below 30 seconds",
+                            "30 saniyenin altında müzik gösterme",
                             style: TextStyle(
                               color:
                                   darkModeOn ? Colors.white38 : Colors.black38,
                             ),
                           ),
                           title: Text(
-                            "30 Seconds Rule",
+                            "30 Saniye Kuralı",
                             style: TextStyle(
                               color: darkModeOn ? Colors.white : Colors.black,
                             ),
@@ -111,14 +111,14 @@ class _MiscellaneousState extends State<Miscellaneous> {
                           checkColor:
                               darkModeOn ? kMaterialBlack : Colors.white,
                           subtitle: Text(
-                            "Don't show '<Unknown>' as an Artist",
+                            "'<Bilinmeyen>' öğesini Sanatçı olarak gösterme",
                             style: TextStyle(
                               color:
                                   darkModeOn ? Colors.white38 : Colors.black38,
                             ),
                           ),
                           title: Text(
-                            "Unknown Artist",
+                            "Bilinmeyen Sanatçı",
                             style: TextStyle(
                               color: darkModeOn ? Colors.white : Colors.black,
                             ),
@@ -140,14 +140,14 @@ class _MiscellaneousState extends State<Miscellaneous> {
                           checkColor:
                               darkModeOn ? kMaterialBlack : Colors.white,
                           subtitle: Text(
-                            "Choose custom directories to scan for music",
+                            "Müzik taraması için özel dizinler seçin",
                             style: TextStyle(
                               color:
                                   darkModeOn ? Colors.white38 : Colors.black38,
                             ),
                           ),
                           title: Text(
-                            "Custom Scan",
+                            "Özel Tarama",
                             style: TextStyle(
                               color: darkModeOn ? Colors.white : Colors.black,
                             ),
@@ -200,14 +200,14 @@ class _MiscellaneousState extends State<Miscellaneous> {
                           checkColor:
                               darkModeOn ? kMaterialBlack : Colors.white,
                           subtitle: Text(
-                            "Artwork is set as lockscreen wallpaper",
+                            "Resim, kilit ekranı duvar kağıdı olarak ayarlandı",
                             style: TextStyle(
                               color:
                                   darkModeOn ? Colors.white38 : Colors.black38,
                             ),
                           ),
                           title: Text(
-                            "WallPx (BETA)",
+                            "Arka Plan (BETA)",
                             style: TextStyle(
                               color: darkModeOn ? Colors.white : Colors.black,
                             ),

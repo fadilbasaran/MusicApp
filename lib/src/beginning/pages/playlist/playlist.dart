@@ -71,7 +71,7 @@ class _PlaylistState extends State<Playlist>
                             create: (_) => Leprovider(),
                             builder: (context, child) => const AddSongs(
                               modify: false,
-                              playlistName: "Enter Playlist Name",
+                              playlistName: "Oynatma Listesi Adını Girin",
                             ),
                           ),
                         ),
@@ -79,7 +79,7 @@ class _PlaylistState extends State<Playlist>
                     },
                     child: Center(
                       child: Text(
-                        'Create Playlist',
+                        'Çalma Listesi Oluştur',
                         textAlign: TextAlign.center,
                         maxLines: 2,
                         style: TextStyle(
@@ -115,7 +115,7 @@ class _PlaylistState extends State<Playlist>
                   create: (_) => Leprovider(),
                   builder: (context, child) => const AddSongs(
                     modify: false,
-                    playlistName: "Enter Playlist Name",
+                    playlistName: "Oynatma Listesi Adını Girin",
                   ),
                 ),
               ),

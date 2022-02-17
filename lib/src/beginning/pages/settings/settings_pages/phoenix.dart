@@ -1,6 +1,6 @@
-import 'package:another_flushbar/flushbar.dart';
+/*import 'package:another_flushbar/flushbar.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:phoenix/src/beginning/pages/settings/settings_pages/privacy.dart';
+import 'package:phoenix/src/beginning/pages/settings/settings_pages/privacy.dart';*/
 import 'package:phoenix/src/beginning/utilities/global_variables.dart';
 import 'package:phoenix/src/beginning/widgets/artwork_background.dart';
 import 'package:phoenix/src/beginning/utilities/constants.dart';
@@ -93,7 +93,7 @@ class _PhoenixState extends State<Phoenix> {
                               ),
                             ),
                             Text(
-                              "PHOENIX",
+                              "MUSIC APP",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: orientedCar
@@ -101,27 +101,6 @@ class _PhoenixState extends State<Phoenix> {
                                       : deviceWidth! / 13,
                                   fontFamily: "NightMachine"),
                               textAlign: TextAlign.start,
-                            ),
-                            const Padding(padding: EdgeInsets.only(top: 2)),
-                            Text(
-                              changelogs.keys
-                                  .toList()[changelogs.length - 1]
-                                  .replaceRange(
-                                      changelogs.keys
-                                              .toList()[changelogs.length - 1]
-                                              .length -
-                                          8,
-                                      changelogs.keys
-                                          .toList()[changelogs.length - 1]
-                                          .length,
-                                      ""),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: orientedCar
-                                    ? deviceWidth! / 31
-                                    : deviceWidth! / 26,
-                              ),
                             ),
                           ],
                         ),
@@ -169,7 +148,7 @@ class _PhoenixState extends State<Phoenix> {
                                     padding: const EdgeInsets.only(
                                         right: 16, left: 16),
                                     child: Text(
-                                      "The Phoenix Project will forever be free and open-source.",
+                                      "Biz en iyisini yapana kadar en iyisi bu",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.white,
@@ -186,7 +165,7 @@ class _PhoenixState extends State<Phoenix> {
                                             : deviceWidth! / 16),
                                   ),
                                   Text(
-                                    '@SHΛΛИ FΛYDH',
+                                    '@FADIL BASARAN',
                                     style: TextStyle(
                                       fontFamily: 'Inter',
                                       color: Colors.white,
@@ -222,9 +201,23 @@ class _PhoenixState extends State<Phoenix> {
                                               final Uri emailLaunchUri = Uri(
                                                 scheme: 'mailto',
                                                 path:
-                                                    'shaanfaydhphoenix@gmail.com',
+                                                    'fadilbasaran.gml@gmail.com',
                                               );
                                               launch(emailLaunchUri.toString());
+                                            }),
+                                        IconButton(
+                                            iconSize: orientedCar
+                                                ? deviceWidth! / 17
+                                                : deviceWidth! / 17,
+                                            icon: const Icon(MdiIcons.linkedin,
+                                                color: Colors.white),
+                                            onPressed: () async {
+                                              const String _url =
+                                                  "https://www.linkedin.com/in/fad%C4%B1l-ba%C5%9Faran-a58932155/";
+                                              await canLaunch(_url)
+                                                  ? await launch(_url)
+                                                  : throw Exception(
+                                                      'Başlatılamadı $_url');
                                             }),
                                         IconButton(
                                             iconSize: orientedCar
@@ -234,65 +227,11 @@ class _PhoenixState extends State<Phoenix> {
                                                 color: Colors.white),
                                             onPressed: () async {
                                               const String _url =
-                                                  "https://github.com/shaan-mephobic/The-Phoenix-Project";
+                                                  "https://github.com/fadilbasaran";
                                               await canLaunch(_url)
                                                   ? await launch(_url)
                                                   : throw Exception(
-                                                      'Could not launch $_url');
-                                            }),
-                                        IconButton(
-                                            iconSize: orientedCar
-                                                ? deviceWidth! / 17
-                                                : deviceWidth! / 17,
-                                            icon: const Icon(
-                                                Ionicons.logo_paypal,
-                                                color: Colors.white),
-                                            onPressed: () async {
-                                              Flushbar(
-                                                messageText: const Text(
-                                                    "Money doesn't interest me. Have a great day!",
-                                                    style: TextStyle(
-                                                        fontFamily: "Futura",
-                                                        color: Colors.white)),
-                                                icon: Icon(
-                                                  Icons
-                                                      .money_off_csred_outlined,
-                                                  size: 28.0,
-                                                  color: kCorrect,
-                                                ),
-                                                shouldIconPulse: true,
-                                                dismissDirection:
-                                                    FlushbarDismissDirection
-                                                        .HORIZONTAL,
-                                                duration:
-                                                    const Duration(seconds: 2),
-                                                borderColor: Colors.white
-                                                    .withOpacity(0.04),
-                                                borderWidth: 1,
-                                                backgroundColor: glassOpacity!,
-                                                flushbarStyle:
-                                                    FlushbarStyle.FLOATING,
-                                                isDismissible: true,
-                                                barBlur:
-                                                    musicBox.get("glassBlur") ??
-                                                        18,
-                                                margin: const EdgeInsets.only(
-                                                    bottom: 20,
-                                                    left: 8,
-                                                    right: 8),
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                // leftBarIndicatorColor:
-                                                //     Color(0xFFCB0047),
-                                              ).show(context);
-                                              await Future.delayed(
-                                                  const Duration(seconds: 2));
-                                              const String _url =
-                                                  "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                                              await canLaunch(_url)
-                                                  ? await launch(_url)
-                                                  : throw Exception(
-                                                      'Could not launch $_url');
+                                                      'Başlatılamadı $_url');
                                             }),
                                         Padding(
                                             padding: EdgeInsets.only(
@@ -303,89 +242,6 @@ class _PhoenixState extends State<Phoenix> {
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: orientedCar
-                                ? deviceWidth! / 10
-                                : deviceWidth! / 8),
-                      ),
-                      Container(
-                        height:
-                            orientedCar ? deviceWidth! / 3 : deviceWidth! / 3.0,
-                        width: orientedCar
-                            ? deviceWidth! / 1.5
-                            : deviceWidth! / 1.5,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black
-                                  .withOpacity(glassShadowOpacity! / 100),
-                              blurRadius: glassShadowBlur,
-                              offset: kShadowOffset,
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(kRounded),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(kRounded),
-                          child: BackdropFilter(
-                            filter: glassBlur,
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(kRounded),
-                                border: Border.all(
-                                    color: Colors.white.withOpacity(0.04)),
-                                color: glassOpacity,
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(kRounded),
-                                child: Container(
-                                  height: orientedCar
-                                      ? deviceWidth! / 3.0
-                                      : deviceWidth! / 3.0,
-                                  width: orientedCar
-                                      ? deviceWidth! / 1.5
-                                      : deviceWidth! / 1.5,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(kRounded),
-                                  ),
-                                  child: InkWell(
-                                      borderRadius:
-                                          BorderRadius.circular(kRounded),
-                                      child: Center(
-                                        child: Text(
-                                          "DATA PRIVACY",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: orientedCar
-                                                ? deviceWidth! / 18
-                                                : deviceWidth! / 18,
-                                          ),
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            maintainState: false,
-                                            builder: (context) =>
-                                                ChangeNotifierProvider<
-                                                        Leprovider>(
-                                                    create: (_) => Leprovider(),
-                                                    child: const Privacy()),
-                                          ),
-                                        );
-                                      }),
-                                ),
                               ),
                             ),
                           ),
@@ -439,7 +295,7 @@ class _PhoenixState extends State<Phoenix> {
                                 : deviceWidth! / 8),
                       ),
                       Text(
-                        "Copyright © 2020, Shaan Faydh",
+                        "Copyright © 2022, Fadıl Başaran",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: orientedCar
@@ -458,7 +314,7 @@ class _PhoenixState extends State<Phoenix> {
                             overlayColor:
                                 MaterialStateProperty.all(Colors.white30)),
                         child: Text(
-                          "Licenses",
+                          "Llisanslar",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: orientedCar

@@ -34,6 +34,7 @@ void main() async {
   );
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: themeOfApp,
       home: MultiProvider(
         providers: [

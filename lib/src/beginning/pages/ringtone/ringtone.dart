@@ -99,7 +99,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
                   ),
                 ),
               )
-            : Text("Set Ringtone",
+            : Text("Zil Sesini Ayarla",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: deviceWidth! / 25,
@@ -134,7 +134,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         title: Text(
-          "RINGTONE",
+          "ZİL SESİ",
           style: TextStyle(
             color: Colors.white,
             fontSize: deviceWidth! / 18,
@@ -252,7 +252,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
                                   Column(
                                     children: [
                                       Text(
-                                        "Select range",
+                                        "Aralık seçin",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: deviceWidth! / 18,
@@ -410,7 +410,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
                                       Column(
                                         children: [
                                           Text(
-                                            "Fade in",
+                                            "Azalt",
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: deviceWidth! / 18,
@@ -500,7 +500,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
 
   ringtoneSuccess(BuildContext context) async {
     Flushbar(
-      messageText: const Text("Ringtone updated!",
+      messageText: const Text("Zil sesi güncellendi!",
           style: TextStyle(fontFamily: "Futura", color: Colors.white)),
       icon: Icon(
         Icons.music_note,
@@ -523,7 +523,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
 
   ringtoneFailed(BuildContext context) async {
     Flushbar(
-      messageText: const Text("Failed to set ringtone",
+      messageText: const Text("Zil sesi ayarlanamadı",
           style: TextStyle(fontFamily: "Futura", color: Colors.white)),
       icon: const Icon(
         Icons.error_outline,
@@ -752,7 +752,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
                                         overlayColor: MaterialStateProperty.all(
                                             Colors.white30)),
                                     child: const Text(
-                                      "CANCEL",
+                                      "İPTAL ET",
                                       style: TextStyle(
                                         color: Colors.white,
                                       ),
@@ -788,7 +788,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
                                         } else {
                                           Flushbar(
                                             messageText: const Text(
-                                                "Values out of range.",
+                                                "Değerler aralık dışında.",
                                                 style: TextStyle(
                                                     fontFamily: "Futura",
                                                     color: Colors.white)),
@@ -828,7 +828,7 @@ class _RingtoneState extends State<Ringtone> with TickerProviderStateMixin {
                                       ),
                                     ),
                                     child: const Text(
-                                      "APPLY",
+                                      "UYGULA",
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),

@@ -51,7 +51,7 @@ class _InterfaceState extends State<Interface> {
             centerTitle: true,
             backgroundColor: Colors.transparent,
             title: Text(
-              "Interface",
+              "Arayüz",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: deviceWidth! / 18,
@@ -75,13 +75,13 @@ class _InterfaceState extends State<Interface> {
                         color: Colors.transparent,
                         child: ListTile(
                           title: const Text(
-                            "Glass Effect",
+                            "Cam Etkisi",
                             style: TextStyle(
                               color: Colors.white,
                             ),
                           ),
                           subtitle: const Text(
-                            "Adjust blur and color of glass theme.",
+                            "Cam temasının bulanıklığını ve rengini ayarlayın.",
                             style: TextStyle(
                               color: Colors.white38,
                             ),
@@ -108,13 +108,13 @@ class _InterfaceState extends State<Interface> {
                         color: Colors.transparent,
                         child: ListTile(
                           title: const Text(
-                            "Default Artwork",
+                            "Varsayılan Eserler",
                             style: TextStyle(
                               color: Colors.white,
                             ),
                           ),
                           subtitle: const Text(
-                            "Set custom image as default artwork.",
+                            "Özel resmi varsayılan resim olarak ayarlayın.",
                             style: TextStyle(
                               color: Colors.white38,
                             ),
@@ -154,7 +154,7 @@ class _InterfaceState extends State<Interface> {
                                     mode: FileMode.write);
                             Flushbar(
                               messageText: const Text(
-                                  "Default artwork has been reset",
+                                  "Varsayılan resim sıfırlandı",
                                   style: TextStyle(
                                       fontFamily: "Futura",
                                       color: Colors.white)),
@@ -202,13 +202,13 @@ class _InterfaceState extends State<Interface> {
                           activeColor: kCorrect,
                           checkColor: kMaterialBlack,
                           subtitle: const Text(
-                            "A fluid bouncing animation on scrolling",
+                            "Kaydırma sırasında akıcı bir zıplama animasyonu",
                             style: TextStyle(
                               color: Colors.white38,
                             ),
                           ),
                           title: const Text(
-                            "Fluid",
+                            "Akışkanlık",
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -228,13 +228,13 @@ class _InterfaceState extends State<Interface> {
                           activeColor: kCorrect,
                           checkColor: kMaterialBlack,
                           subtitle: const Text(
-                            "Use albumart as background",
+                            "Albüm resmini arka plan olarak kullan",
                             style: TextStyle(
                               color: Colors.white38,
                             ),
                           ),
                           title: const Text(
-                            "Dynamic Background",
+                            "Dinamik Arka Plan",
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -254,13 +254,13 @@ class _InterfaceState extends State<Interface> {
                           activeColor: kCorrect,
                           checkColor: kMaterialBlack,
                           subtitle: const Text(
-                            "Square shaped artwork in lists",
+                            "Listelerde kare şeklindeki eserler",
                             style: TextStyle(
                               color: Colors.white38,
                             ),
                           ),
                           title: const Text(
-                            "Square Art",
+                            "Kare Eserler",
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -280,13 +280,13 @@ class _InterfaceState extends State<Interface> {
                           activeColor: kCorrect,
                           checkColor: kMaterialBlack,
                           subtitle: const Text(
-                            "Position icons for driver's ease",
+                            "Sürücünün rahatlığı için konum simgeleri",
                             style: TextStyle(
                               color: Colors.white38,
                             ),
                           ),
                           title: const Text(
-                            "Left Steering",
+                            "Sol Taraf",
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -306,13 +306,13 @@ class _InterfaceState extends State<Interface> {
                           activeColor: kCorrect,
                           checkColor: kMaterialBlack,
                           subtitle: const Text(
-                            "Show additional song data in now playing.",
+                            "Şu anda çalmakta olan ek şarkı verilerini göster.",
                             style: TextStyle(
                               color: Colors.white38,
                             ),
                           ),
                           title: const Text(
-                            "Audiophile Data",
+                            "Odyofil Verileri",
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -358,13 +358,13 @@ class _InterfaceState extends State<Interface> {
                         color: Colors.transparent,
                         child: ListTile(
                             subtitle: const Text(
-                              "Show progress in mini-player.",
+                              "Mini oynatıcıda ilerlemeyi göster.",
                               style: TextStyle(
                                 color: Colors.white38,
                               ),
                             ),
                             title: const Text(
-                              "Mini-Player Progress",
+                              "Mini-Oynatıcı İlerlemesi",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -390,7 +390,7 @@ class _InterfaceState extends State<Interface> {
                               },
                               items: <String>[
                                 'Top',
-                                'Bottom',
+                                'Button',
                                 'Hidden',
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(

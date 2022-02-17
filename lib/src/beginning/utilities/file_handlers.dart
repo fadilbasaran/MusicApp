@@ -22,6 +22,6 @@ String getFileExt(String file) {
     String ext = trim.replaceRange(0, trim.indexOf("."), "");
     return ext;
   } else {
-    throw Exception("No Extension found in $file");
+    throw Exception("Uzantı bulunamadı $file");
   }
 }

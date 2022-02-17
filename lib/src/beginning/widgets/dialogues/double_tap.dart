@@ -10,7 +10,7 @@ onDoubleTap(BuildContext context) async {
   if (!isSongLiked(nowMediaItem.id)) {
     rmLikedSong(nowMediaItem.id);
     Flushbar(
-      messageText: const Text("Removed From Liked Songs",
+      messageText: const Text("Beğenilen Şarkılardan Kaldırıldı",
           style: TextStyle(fontFamily: "Futura", color: Colors.white)),
       icon: const Icon(
         Icons.block_rounded,
@@ -34,7 +34,7 @@ onDoubleTap(BuildContext context) async {
     addToLikedSong(nowMediaItem.id);
 
     Flushbar(
-      messageText: const Text("Added To Liked Songs",
+      messageText: const Text("Beğenilen Şarkılara Eklendi",
           style: TextStyle(fontFamily: "Futura", color: Colors.white)),
       icon: const Icon(
         MdiIcons.heart,

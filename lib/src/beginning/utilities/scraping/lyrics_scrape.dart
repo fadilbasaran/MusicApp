@@ -32,7 +32,7 @@ class Lyrics {
 
     // Check if device is connected to the internet
     if (!await hasNetwork()) {
-      return (["Couldn't find any matching lyrics.", path]);
+      return (["Eşleşen şarkı sözü bulunamadı.", path]);
     }
 
     // Scraping lyrics from https://api.lyrics.ovh
@@ -77,7 +77,7 @@ class Lyrics {
         lyrics = lyrics.split(_delimiter2).first;
         if (lyrics.contains('<meta charset="UTF-8">')) throw Error();
       } catch (_) {
-        return (["Couldn't find any matching lyrics.", path]);
+        return (["Eşleşen şarkı sözü bulunamadı.", path]);
       }
     } else {
       try {
@@ -105,7 +105,7 @@ class Lyrics {
             lyrics = lyrics.split(_delimiter2).first;
             if (lyrics.contains('<meta charset="UTF-8">')) throw Error();
           } catch (_) {
-            return (["Couldn't find any matching lyrics.", path]);
+            return (["Eşleşen şarkı sözü bulunamadı.", path]);
           }
         }
       }
@@ -121,7 +121,7 @@ class Lyrics {
 }
 
 lyricsFetch(songArtist, songName, songData) async {
-  lyricsDat = "Searching...";
+  lyricsDat = "Aranıyor...";
   List lyrics = await Lyrics()
       .getLyrics(artist: songArtist, track: songName, path: songData);
   if (onGoingProcess) {
@@ -131,7 +131,7 @@ lyricsFetch(songArtist, songName, songData) async {
       onGoingProcess = false;
       if (anotherLyrics
           .contains("Sometimes you may be asked to solve the CAPTCHA")) {
-        anotherLyrics = "Couldn't find any matching lyrics.";
+        anotherLyrics = "Eşleşen şarkı sözü bulunamadı.";
         throw Exception("CAPTCH-MATE");
       }
       if (anotherLyrics.contains("</div>")) {

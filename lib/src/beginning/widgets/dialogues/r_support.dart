@@ -5,7 +5,7 @@ import 'package:phoenix/src/beginning/utilities/global_variables.dart';
 androidRSupport(BuildContext context) async {
   Flushbar(
     messageText: const Text(
-        "Feature not available for this android version yet.\nComing soon!",
+        "Özellik henüz bu android sürümü için mevcut değil.\nÇok yakında!",
         style: TextStyle(fontFamily: "Futura", color: Colors.white)),
     icon: const Icon(
       Icons.error_outline,

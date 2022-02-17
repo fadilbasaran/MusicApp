@@ -43,7 +43,7 @@ class ListHeader extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    "${listOfSong!.length} Tracks",
+                    "${listOfSong!.length} Şarkı Bulundu",
                     style: const TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),
@@ -72,7 +72,7 @@ class ListHeader extends StatelessWidget {
                             overlayColor:
                                 MaterialStateProperty.all(Colors.white30)),
                         label: const Text(
-                          "Shuffle",
+                          "Karıştır",
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.white,

@@ -111,7 +111,7 @@ void lyricsFoo() async {
         ? false
         : musicBox.get('offlineLyrics').containsKey(nowMediaItem.id)) {
       lyricsDat = musicBox.get('offlineLyrics')[nowMediaItem.id];
-      if (lyricsDat == "Couldn't find any matching lyrics." ||
+      if (lyricsDat == "Eşleşen şarkı sözü bulunamadı." ||
           lyricsDat == "" ||
           lyricsDat == " ") {
         holdUpLyrics();

@@ -53,7 +53,7 @@ class _AddSongsState extends State<AddSongs> {
           floatingActionButton: FloatingActionButton.extended(
             splashColor: Colors.transparent,
             icon: const Icon(Icons.check_rounded, color: Colors.black),
-            label: Text(widget.modify ? "MODIFY" : "CREATE",
+            label: Text(widget.modify ? "DEĞİŞTİR" : "OLUŞTUR",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: deviceWidth! / 25,
@@ -61,11 +61,11 @@ class _AddSongsState extends State<AddSongs> {
             backgroundColor: const Color(0xFF1DB954),
             elevation: 8.0,
             onPressed: () {
-              if (!((widget.playlistName == "Enter Playlist Name" &&
+              if (!((widget.playlistName == "Oynatma Listesi Adını Girin" &&
                       nameOfPlaylist != null) ||
-                  (widget.playlistName != "Enter Playlist Name"))) {
+                  (widget.playlistName != "Oynatma Listesi Adını Girin"))) {
                 Flushbar(
-                  messageText: const Text("Enter a Playlist Name! ¯\\_(ツ)_/¯",
+                  messageText: const Text("Bir Oynatma Listesi Adı girin! ¯\\_(ツ)_/¯",
                       style:
                           TextStyle(fontFamily: "Futura", color: Colors.white)),
                   icon: const Icon(
