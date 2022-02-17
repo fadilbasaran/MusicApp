@@ -36,7 +36,7 @@
 
   <application 
       android:name="io.flutter.app.FlutterApplication" 
-      android:label="The Phoenix Project" 
+      android:label="MusicApp" 
       android:icon="@mipmap/ic_launcher" 
       android:requestLegacyExternalStorage="true">
     <activity 

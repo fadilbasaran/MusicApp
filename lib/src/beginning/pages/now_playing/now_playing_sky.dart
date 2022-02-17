@@ -65,7 +65,7 @@ class _NowPlayingSkyState extends State<NowPlayingSky> with TickerProviderStateM
   }
 
   Map<String, List<String>> commands = {
-    "skip": ["geç", "ileri", "atla"],
+    "skip": ["geç", "ileri", "atla","şarkıyı geç",],
     "previous": ["önceki", "geri", "geri git"],
     "pause": ["durdur", "duraklat", "durakla" , "dur dur"],
     "play": ["devam et", "başlat", "başla"],

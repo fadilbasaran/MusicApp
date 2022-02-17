@@ -21,9 +21,9 @@ void main() async {
   audioHandler = await AudioService.init(
     builder: () => AudioPlayerTask(),
     config: const AudioServiceConfig(
-      androidNotificationChannelName: "Phoenix Music",
+      androidNotificationChannelName: "MusicApp",
       androidNotificationIcon: "drawable/phoenix_awaken",
-      androidNotificationChannelDescription: "Phoenix Music Notification",
+      androidNotificationChannelDescription: "MusicApp Notification",
     ),
   );
   SystemChrome.setSystemUIOverlayStyle(
