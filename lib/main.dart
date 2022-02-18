@@ -23,7 +23,7 @@ void main() async {
     config: const AudioServiceConfig(
       androidNotificationChannelName: "MusicApp",
       androidNotificationIcon: "drawable/phoenix_awaken",
-      androidNotificationChannelDescription: "MusicApp Notification",
+      androidNotificationChannelDescription: "MusicApp Bildirimi",
     ),
   );
   SystemChrome.setSystemUIOverlayStyle(
@@ -37,6 +37,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       theme: themeOfApp,
       home: MultiProvider(
+        
         providers: [
           ChangeNotifierProvider<Leprovider>(create: (_) => Leprovider()),
           ChangeNotifierProvider<MrMan>(

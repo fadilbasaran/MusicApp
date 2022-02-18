@@ -796,11 +796,11 @@ class _NowPlayingState extends State<NowPlaying> with TickerProviderStateMixin {
                                             },
                                           );
                                         }),
-                                        IconButton(
+                                        /*IconButton(
                                           color: Colors.red,
                                           onPressed: () => startListening(),
                                           icon: Icon(_isListening ? Icons.mic_off_outlined : Icons.mic),
-                                        )
+                                        )*/
                                       ],
                                     ),
                                   ),

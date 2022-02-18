@@ -12,6 +12,8 @@ import 'package:phoenix/src/beginning/widgets/dialogues/quick_tips.dart';
 import 'package:phoenix/src/beginning/pages/now_playing/mini_playing.dart';
 import 'package:phoenix/src/beginning/pages/playlist/playlist.dart';
 import 'package:phoenix/src/beginning/pages/settings/settings.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 import 'pages/tracks/tracks.dart';
 import 'package:phoenix/src/beginning/pages/genres/genres.dart';
 import 'package:phoenix/src/beginning/pages/artists/artists.dart';
@@ -46,6 +48,8 @@ class _BeginState extends State<Begin>
   bool isonexit = false;
   bool stackedPhoenix = false;
   TabController? tabController;
+  bool _isListening = false;
+  SpeechToText speechController = SpeechToText();
 
   @override
   void initState() {
@@ -59,6 +63,52 @@ class _BeginState extends State<Begin>
     });
     super.initState();
   }
+
+  void startListening() async {
+    setState(() {
+      _isListening = true;
+    });
+    await speechController.listen(
+      onResult: (result) => _onSpeechResult(result),
+    );
+  }
+
+  void _onSpeechResult(SpeechRecognitionResult result) {
+    var speechText = result.recognizedWords;
+    debugPrint(speechText);
+    if (commands.values.elementAt(0).contains(speechText.toLowerCase())) {
+      audioHandler.skipToNext();
+    } else if (commands.values
+        .elementAt(1)
+        .contains(speechText.toLowerCase())) {
+      audioHandler.skipToPrevious();
+    } else if (commands.values
+        .elementAt(2)
+        .contains(speechText.toLowerCase())) {
+      audioHandler.pause();
+    } else if (commands.values
+        .elementAt(3)
+        .contains(speechText.toLowerCase())) {
+      audioHandler.play();
+    } 
+
+    setState(() {
+      _isListening = false;
+    });
+  }
+
+  Map<String, List<String>> commands = {
+    "skip": [
+      "geç",
+      "ileri",
+      "atla",
+      "şarkıyı geç",
+    ],
+    "previous": ["önceki", "geri", "geri git"],
+    "pause": ["durdur", "duraklat", "durakla", "dur dur"],
+    "play": ["devam et", "başlat", "başla"],
+    
+  };
 
   @override
   void dispose() {
@@ -122,6 +172,14 @@ class _BeginState extends State<Begin>
     rootState = Provider.of<Leprovider>(context);
 
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 12),
+        child: FloatingActionButton(
+          onPressed: () => startListening(),
+          backgroundColor: Colors.black87,
+          child: Icon(_isListening ? Icons.mic : Icons.mic_off_outlined),
+        ),
+      ),
       extendBodyBehindAppBar: true,
       body: WillPopScope(
         onWillPop: _onWillPop,

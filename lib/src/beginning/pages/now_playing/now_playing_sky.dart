@@ -406,11 +406,11 @@ class _NowPlayingSkyState extends State<NowPlayingSky> with TickerProviderStateM
                               },
                             );
                           }),
-                          IconButton(
+                          /*IconButton(
                             color: Colors.white,
                             onPressed: () => startListening(),
                             icon: Icon(_isListening ?  Icons.mic :Icons.mic_off_outlined ),
-                          )
+                          )*/
                         ]),
                       ),
                       Row(
